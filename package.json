@@ -1,0 +1,10 @@
+{
+ "name": "agent-act-check",
+ "version": "0.1.0",
+ "description": "Was this act put there by something the agent read? A per-act check for indirect prompt injection, with a small typed-answer classifier.",
+ "main": "actcheck.js",
+ "bin": { "agent-act-check": "cli.js" },
+ "scripts": { "test": "node --test test/" },
+ "engines": { "node": ">=18" },
+ "license": "MIT"
+}
