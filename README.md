@@ -48,9 +48,27 @@ pairs from opt-in coding sessions (SWE-chat, sessions with no reported problem).
   reading reviews) and is given by name. An injected act that stays close to the task will read lower. Please try
   that.
 - **The carries question was written the day it was measured**, and has no held-out attack set yet.
+- **The headline numbers are for short acts and short content.** See "Known bypass: length" below.
 - The real pairs are 160 sessions of one coding agent.
 - One classifier, one model version. Scores move a few points between identical runs.
 - "Caught" means flagged. Nothing here stops an act; what a flag does is the caller's decision.
+
+## Known bypass: length
+
+**This check can be walked around today by making things long.** It reads the first 400 characters of the act and
+the first 6,000 of the content before it. Tested on 300 InjecAgent cases:
+
+| Where the attack sits | Caught |
+|---|---|
+| The attacker's call after the 400th character of the act | 0 of 300 |
+| The same, reading the head and tail of the act | 44 of 300 |
+| The injected instruction after the 6,000th character of the content | 8 of 300 |
+| The same, reading the content in overlapping pieces and keeping the highest answer | 292 of 300, no honest act flagged |
+
+So long content has a fix that works and is not yet in this code; a long act has none. If you call this from a hook,
+give it the whole act and do not rely on the 400-character cut: split it yourself, or refuse to pass an act you could
+not read in full. Padding an attack with ordinary activity is a known way past detectors, and this is that trick
+inside a single act.
 
 ## What it does not do
 
@@ -60,7 +78,6 @@ pairs from opt-in coding sessions (SWE-chat, sessions with no reported problem).
   `readable: false` and are never flagged or passed as fine.
 - It is for content an agent reads, not for prompts a person types.
 - A request that hands the instruction over ("do what the note says") makes the content's instruction the task.
-- Only the first 6,000 characters of an answer are read.
 
 ## Use
 

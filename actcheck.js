@@ -11,6 +11,9 @@
  *   intent    is the act off every recent request, each read alone?                             (one call a request)
  * Flag when both say so. The numbers are returned whatever they are, so a caller can record them.
  *
+ * KNOWN BYPASS: only the first `stepChars` (400) of the act and `contentChars` (6,000) of the content are read. An
+ * attacker's call placed after the 400th character of an act was missed 300 times in 300. See the README.
+ *
  * No dependencies. Node 18 or later (global fetch).
  */
 
