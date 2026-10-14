@@ -123,6 +123,52 @@ node bench/injecagent.js InjecAgent/data/test_cases_dh_base.json InjecAgent/data
 
 No dataset is included here.
 
+## Where the data is
+
+Nothing is bundled here; fetch what you need from its owner. Check each page for its licence and terms before you
+use it. "Sign-in" means a Hugging Face account that has accepted the dataset's terms on its page.
+
+**Used for the headline result**
+
+| Set | Where | What we used |
+|---|---|---|
+| InjecAgent | https://github.com/uiuc-kang-lab/InjecAgent | `data/test_cases_dh_base.json`, `data/test_cases_ds_base.json` (and the `_enhanced` pair) |
+| SWE-chat (sign-in; ODC-By) | https://huggingface.co/datasets/SALT-NLP/SWE-chat | `sessions.parquet`, and `transcripts/<session_id>.jsonl` for 400 sampled Claude Code sessions |
+| Coding-agent misalignment episodes (MIT) | https://github.com/ND-SaNDwichLAB/coding-agent-misalignment | `misalignments.json`; its `session_sha` is SWE-chat's `session_id` |
+
+**Used for the per-act task check**
+
+| Set | Where | What we used |
+|---|---|---|
+| MisActBench (CC-BY-4.0) | https://huggingface.co/datasets/osunlp/MisActBench | `misactbench.json`; code at https://github.com/OSU-NLP-Group/Misaligned-Action-Detection |
+
+**Used to test screens on content and prompts**
+
+| Set | Where | What we used |
+|---|---|---|
+| BIPIA | https://github.com/microsoft/BIPIA | `benchmark/text_attack_test.json`, `code_attack_test.json`, and the email, table and code contexts |
+| deepset prompt-injections | https://huggingface.co/datasets/deepset/prompt-injections | both splits |
+| Tensor Trust | https://github.com/HumanCompatibleAI/tensor-trust-data | `benchmarks/hijacking-robustness`, `benchmarks/extraction-robustness` |
+| HackAPrompt (sign-in) | https://huggingface.co/datasets/hackaprompt/hackaprompt-dataset | `hackaprompt.parquet`, the `user_input` column |
+| Gandalf "ignore instructions" | https://huggingface.co/datasets/Lakera/gandalf_ignore_instructions | train split |
+| In-the-wild jailbreak prompts | https://huggingface.co/datasets/TrustAIRLab/in-the-wild-jailbreak-prompts | the `jailbreak_2023_12_25` and `regular_2023_12_25` sets |
+| WildJailbreak (sign-in) | https://huggingface.co/datasets/allenai/wildjailbreak | `train/train.tsv`, `eval/eval.tsv` |
+| JailbreakBench artifacts | https://github.com/JailbreakBench/artifacts | `attack-artifacts/` for GCG, PAIR, JBC, DSN and random search |
+| L1B3RT4S | https://github.com/elder-plinius/L1B3RT4S | the per-vendor `.mkd` files |
+
+The last four are prompts typed to a model, not content an agent reads. This check is not meant for them, and on
+them it does not separate harmful from harmless; they are listed because we ran them.
+
+With the Hugging Face CLI, after `hf auth login`:
+
+```bash
+hf download SALT-NLP/SWE-chat sessions.parquet --repo-type dataset --local-dir swechat
+hf download hackaprompt/hackaprompt-dataset --repo-type dataset --local-dir hackaprompt
+hf download allenai/wildjailbreak --repo-type dataset --local-dir wildjailbreak
+```
+
+SWE-chat's full tables are about 12 GB; the transcripts can be fetched one session at a time.
+
 ## Related work
 
 The idea of asking whether a tool call carries out an instruction planted in content the agent read is published:
