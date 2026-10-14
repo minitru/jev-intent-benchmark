@@ -1,4 +1,4 @@
-# agent-act-check
+# jev-intent-benchmark
 
 **Was this act put there by something the agent read, and not by the person it works for?**
 
@@ -18,6 +18,9 @@ It flags when both say so, and returns both numbers either way.
 
 This is research code from the [xChk](https://xchk.io) project, released so people can try it and break it. It is
 not a product and not a guarantee.
+
+The name: the check is asked of Jev, TypeSafe's small typed-answer model, and the repository holds the check, the
+examples and a script to benchmark it on a public attack set. It is not affiliated with or endorsed by TypeSafe.
 
 ## Why look at the act
 

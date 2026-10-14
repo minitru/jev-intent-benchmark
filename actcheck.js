@@ -1,6 +1,6 @@
 'use strict';
 /**
- * agent-act-check: was this act put there by something the agent read, and not by the person it works for?
+ * jev-intent-benchmark: was this act put there by something the agent read, and not by the person it works for?
  *
  * One check at the moment an agent is about to act, from three pieces of text a tool-boundary hook already has:
  *   requests  what the person asked in this session, oldest first
